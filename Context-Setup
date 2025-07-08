@@ -1,0 +1,173 @@
+LangGraph Studio Setup & Development Guide
+Overview
+This guide documents the setup and usage of LangGraph Studio for building visual AI agent workflows. LangGraph Studio is the visual IDE for LangChain/LangGraph that enables rapid agent development without extensive coding.
+Current Setup Status
+
+✅ LangGraph CLI installed via pipx
+✅ Working project created at ~/Desktop/working-agent
+✅ Studio accessible at http://127.0.0.1:2024
+✅ Basic agent template running (start → call_model → end)
+
+Installation Summary
+Prerequisites Installed
+
+Python 3.13.4 (via Homebrew)
+pipx (for isolated Python applications)
+LangGraph CLI with in-memory runtime
+
+Key Commands Used
+bash# Install pipx
+brew install pipx
+pipx ensurepath
+
+# Install LangGraph CLI
+pipx install "langgraph-cli[inmem]"
+
+# Create new project
+cd ~/Desktop
+langgraph new working-agent
+# Selected: Template 1 (Basic), Python
+
+# Install project dependencies
+cd working-agent
+pip3 install -e . --break-system-packages --user
+
+# Launch Studio
+langgraph dev
+How to Launch LangGraph Studio
+Method 1: Manual Launch
+bashcd ~/Desktop/working-agent
+langgraph dev
+Then open Chrome and navigate to: http://127.0.0.1:2024
+Method 2: Quick Launch Alias (Recommended)
+Add to ~/.zshrc:
+bashalias studio='cd ~/Desktop/working-agent && langgraph dev'
+Then simply type studio in Terminal to launch.
+Studio Interface Overview
+Main Components
+
+Graph View: Visual representation of agent workflow
+
+Nodes represent agent states/actions
+Edges show flow between states
+Yellow highlighting shows active processing
+
+
+Chat Interface: Test agent interactions
+
+Input field for queries
+Real-time response display
+View raw data option
+
+
+Controls:
+
+New Thread: Start fresh conversation
+Interrupts: Pause execution at specific nodes
+Memory: View conversation history
+
+
+
+Current Agent Structure
+__start__ → call_model → __end__
+Known Issues & Solutions
+Safari Compatibility
+
+Safari blocks localhost connections by default
+Solution: Use Chrome or Firefox instead
+Alternative: Run with langgraph dev --tunnel for Safari
+
+LangSmith API Key Warning
+
+Studio shows warning about missing LANGSMITH_API_KEY
+Not Required: Studio works without it
+To Remove Warning: Add to .env file in project root:
+LANGSMITH_API_KEY=your_key_here
+
+
+Next Steps for Agent Development
+1. Enhance Current Agent
+
+Add tools (web search, calculators, APIs)
+Implement memory systems
+Create conditional branching
+
+2. Build Agent Teams
+From Studio, you can:
+
+Duplicate agents
+Connect multiple agents
+Create supervisor patterns
+Implement your ICP Research → Interview → Synthesis flow
+
+3. Integration Points
+
+Connect to existing Railway deployment
+Maintain LangSmith monitoring
+Export graphs for production use
+
+Project Structure
+working-agent/
+├── langgraph.json       # Project configuration
+├── pyproject.toml       # Python dependencies
+├── src/                 # Agent source code
+├── .env                 # Environment variables
+└── __pycache__/        # Python cache (ignored)
+Comparison: Old Workflow vs Studio
+Previous Workflow (Tedious)
+
+Write code in Claude
+Copy to local files
+Push to GitHub
+Deploy to Railway
+Test in production
+Repeat for changes
+
+New Studio Workflow (Fast)
+
+Design visually in Studio
+Test instantly in browser
+Iterate in real-time
+Export working code
+Deploy once finalized
+
+Templates Comparison
+Basic Template (Current - Working)
+
+Simple chatbot with memory
+Minimal dependencies
+Good starting point
+Easy to extend
+
+ReAct Template (Attempted - Had Issues)
+
+More complex with tool usage
+Missing dependencies in template
+Would enable web search, calculations
+Can rebuild this functionality in Studio
+
+Development Tips
+
+Start Simple: Use basic template, add complexity gradually
+Test Often: Use Chat interface for immediate feedback
+Save Progress: Studio auto-saves, but commit code regularly
+Monitor Performance: Connect LangSmith for production monitoring
+
+Resources
+
+LangGraph Documentation: https://python.langchain.com/docs/langgraph
+Studio GitHub: https://github.com/langchain-ai/langgraph-studio
+LangSmith Dashboard: https://smith.langchain.com
+
+Vision Alignment
+This visual development environment enables rapid prototyping for your agentic business transformation:
+
+Build agent teams visually
+Test customer interactions immediately
+Deploy proven workflows to Railway
+Scale successful patterns to client businesses
+
+
+Last Updated: January 8, 2025
+Platform: macOS Sequoia, M2 MacBook Pro
+Status: Development Environment Operational
